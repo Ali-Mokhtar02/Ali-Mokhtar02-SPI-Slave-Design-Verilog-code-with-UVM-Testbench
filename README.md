@@ -1,3 +1,3 @@
-# Ali-Mokhtar02-SPI-Slave-Design-Verilog-code-with-UVM-Testbench
+#README
 In this Repo you will find Bugged RAM and SPI Slave designs "SPI_RAM.sv" and "SPI_SLAVE_FILE.sv" with comments stating the bugs found in them and their fix .
 The objective is to verifiy the given buggy designs and fix them if any bugs are found A verification plan and top level UVM environment testbench were created to verify the design functionality. The DUT outputs are compared to the outputs of the golden model in "golden_model_RAM.sv" "golden_model_SPI_Slave.sv" (these files are the same files in "SPI Slave connected to RAM Verilog Design" repo) and an assertions file "assertions_WRAPPER.sv".
