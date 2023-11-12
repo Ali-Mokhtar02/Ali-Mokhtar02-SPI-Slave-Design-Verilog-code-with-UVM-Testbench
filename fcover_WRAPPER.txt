@@ -1,0 +1,194 @@
+Coverage Report by instance with details
+
+=================================================================================
+=== Instance: /Top_WRAPPER/WRAPPER_insta/wrap_sva_insta
+=== Design Unit: work.Wrapper_Assertions
+=================================================================================
+
+Directive Coverage:
+    Directives                       5         5         0   100.00%
+
+DIRECTIVE COVERAGE:
+--------------------------------------------------------------------------------------------
+Name                                     Design Design   Lang File(Line)      Hits Status    
+                                         Unit   UnitType                                     
+--------------------------------------------------------------------------------------------
+/Top_WRAPPER/WRAPPER_insta/wrap_sva_insta/MOSI_Write_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(45)
+                                                                               383 Covered   
+/Top_WRAPPER/WRAPPER_insta/wrap_sva_insta/MOSI_read_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(48)
+                                                                               781 Covered   
+/Top_WRAPPER/WRAPPER_insta/wrap_sva_insta/SS_correct_sequence_ReadData_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(51)
+                                                                               323 Covered   
+/Top_WRAPPER/WRAPPER_insta/wrap_sva_insta/SS_correct_sequence_write_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(54)
+                                                                               340 Covered   
+/Top_WRAPPER/WRAPPER_insta/wrap_sva_insta/SS_correct_sequence_Readadd_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(57)
+                                                                               369 Covered   
+
+=================================================================================
+=== Instance: /WRAPPER_coverage_pkg
+=== Design Unit: work.WRAPPER_coverage_pkg
+=================================================================================
+
+Covergroup Coverage:
+    Covergroups                      1        na        na   100.00%
+        Coverpoints/Crosses          3        na        na        na
+            Covergroup Bins         14        14         0   100.00%
+----------------------------------------------------------------------------------------------------------
+Covergroup                                             Metric       Goal       Bins    Status               
+                                                                                                         
+----------------------------------------------------------------------------------------------------------
+ TYPE /WRAPPER_coverage_pkg/WRAPPER_coverage/WRAPPER_cg 
+                                                      100.00%        100          -    Covered              
+    covered/total bins:                                    14         14          -                      
+    missing/total bins:                                     0         14          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint MOSI_cp                                100.00%        100          -    Covered              
+        covered/total bins:                                 6          6          -                      
+        missing/total bins:                                 0          6          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint ss_n_cp                                100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+    Cross MOSI_Operations                             100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+ Covergroup instance \/WRAPPER_coverage_pkg::WRAPPER_coverage::WRAPPER_cg  
+                                                      100.00%        100          -    Covered              
+    covered/total bins:                                    14         14          -                      
+    missing/total bins:                                     0         14          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint MOSI_cp                                100.00%        100          -    Covered              
+        covered/total bins:                                 6          6          -                      
+        missing/total bins:                                 0          6          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin read_addr_sequence                           2621          1          -    Covered              
+        bin read_data_sequence                           1043          1          -    Covered              
+        bin write_addr_sequence                           561          1          -    Covered              
+        bin write_data_sequence                          2481          1          -    Covered              
+        bin mosilow                                      9588          1          -    Covered              
+        bin mosihigh                                    10212          1          -    Covered              
+    Coverpoint ss_n_cp                                100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin ss_trans1                                    1119          1          -    Covered              
+        bin ss_trans2                                     365          1          -    Covered              
+        bin ss_n_low                                    17463          1          -    Covered              
+        bin ss_n_high                                    2337          1          -    Covered              
+    Cross MOSI_Operations                             100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin read_data_Sequenece                       329          1          -    Covered              
+            bin read_add_Sequenece                        444          1          -    Covered              
+            bin write_add_Sequenece                       226          1          -    Covered              
+            bin write_data_Sequenece                      198          1          -    Covered              
+        Illegal and Ignore Bins:
+            ignore_bin readdata_ign                       334                     -    Occurred             
+            ignore_bin readadd_ign                         60                     -    Occurred             
+            ignore_bin writedata_ign                       46                     -    Occurred             
+            ignore_bin writeadd_ign                        21                     -    Occurred             
+            ignore_bin MOSIhigh                         10212                     -    Occurred             
+            ignore_bin MOSIlow                           9588                     -    Occurred             
+            ignore_bin sslow                            17463                     -    Occurred             
+            ignore_bin sshigh                            2337                     -    Occurred             
+
+COVERGROUP COVERAGE:
+----------------------------------------------------------------------------------------------------------
+Covergroup                                             Metric       Goal       Bins    Status               
+                                                                                                         
+----------------------------------------------------------------------------------------------------------
+ TYPE /WRAPPER_coverage_pkg/WRAPPER_coverage/WRAPPER_cg 
+                                                      100.00%        100          -    Covered              
+    covered/total bins:                                    14         14          -                      
+    missing/total bins:                                     0         14          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint MOSI_cp                                100.00%        100          -    Covered              
+        covered/total bins:                                 6          6          -                      
+        missing/total bins:                                 0          6          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint ss_n_cp                                100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+    Cross MOSI_Operations                             100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+ Covergroup instance \/WRAPPER_coverage_pkg::WRAPPER_coverage::WRAPPER_cg  
+                                                      100.00%        100          -    Covered              
+    covered/total bins:                                    14         14          -                      
+    missing/total bins:                                     0         14          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint MOSI_cp                                100.00%        100          -    Covered              
+        covered/total bins:                                 6          6          -                      
+        missing/total bins:                                 0          6          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin read_addr_sequence                           2621          1          -    Covered              
+        bin read_data_sequence                           1043          1          -    Covered              
+        bin write_addr_sequence                           561          1          -    Covered              
+        bin write_data_sequence                          2481          1          -    Covered              
+        bin mosilow                                      9588          1          -    Covered              
+        bin mosihigh                                    10212          1          -    Covered              
+    Coverpoint ss_n_cp                                100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin ss_trans1                                    1119          1          -    Covered              
+        bin ss_trans2                                     365          1          -    Covered              
+        bin ss_n_low                                    17463          1          -    Covered              
+        bin ss_n_high                                    2337          1          -    Covered              
+    Cross MOSI_Operations                             100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin read_data_Sequenece                       329          1          -    Covered              
+            bin read_add_Sequenece                        444          1          -    Covered              
+            bin write_add_Sequenece                       226          1          -    Covered              
+            bin write_data_Sequenece                      198          1          -    Covered              
+        Illegal and Ignore Bins:
+            ignore_bin readdata_ign                       334                     -    Occurred             
+            ignore_bin readadd_ign                         60                     -    Occurred             
+            ignore_bin writedata_ign                       46                     -    Occurred             
+            ignore_bin writeadd_ign                        21                     -    Occurred             
+            ignore_bin MOSIhigh                         10212                     -    Occurred             
+            ignore_bin MOSIlow                           9588                     -    Occurred             
+            ignore_bin sslow                            17463                     -    Occurred             
+            ignore_bin sshigh                            2337                     -    Occurred             
+
+TOTAL COVERGROUP COVERAGE: 100.00%  COVERGROUP TYPES: 1
+
+DIRECTIVE COVERAGE:
+--------------------------------------------------------------------------------------------
+Name                                     Design Design   Lang File(Line)      Hits Status    
+                                         Unit   UnitType                                     
+--------------------------------------------------------------------------------------------
+/Top_WRAPPER/WRAPPER_insta/wrap_sva_insta/MOSI_Write_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(45)
+                                                                               383 Covered   
+/Top_WRAPPER/WRAPPER_insta/wrap_sva_insta/MOSI_read_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(48)
+                                                                               781 Covered   
+/Top_WRAPPER/WRAPPER_insta/wrap_sva_insta/SS_correct_sequence_ReadData_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(51)
+                                                                               323 Covered   
+/Top_WRAPPER/WRAPPER_insta/wrap_sva_insta/SS_correct_sequence_write_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(54)
+                                                                               340 Covered   
+/Top_WRAPPER/WRAPPER_insta/wrap_sva_insta/SS_correct_sequence_Readadd_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(57)
+                                                                               369 Covered   
+
+TOTAL DIRECTIVE COVERAGE: 100.00%  COVERS: 5
+
+Total Coverage By Instance (filtered view): 100.00%
+

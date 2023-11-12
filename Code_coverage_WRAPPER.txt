@@ -1,0 +1,865 @@
+Coverage Report by instance with details
+
+=================================================================================
+=== Instance: /\Top_WRAPPER#WRAPPER_insta /R
+=== Design Unit: work.SPI_RAM
+=================================================================================
+Branch Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Branches                         8         7         1    87.50%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Top_WRAPPER#WRAPPER_insta /R
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File SPI_RAM.sv
+------------------------------------IF Branch------------------------------------
+    14                                     14347     Count coming in to IF
+    14              1                        392     	if (~rst_n) begin
+    22              1                       2236     	else if (rx_valid) begin
+                                           11719     All False Count
+Branch totals: 3 hits of 3 branches = 100.00%
+
+------------------------------------CASE Branch------------------------------------
+    24                                      2236     Count coming in to CASE
+    25              1                        448     		  2'b00: begin
+    28              1                        299     		  2'b01: begin
+    31              1                        793     		  2'b10: begin
+    34              1                        696     		  2'b11: begin
+                                         ***0***     All False Count
+Branch totals: 4 hits of 5 branches = 80.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Statements                      14        14         0   100.00%
+
+================================Statement Details================================
+
+Statement Coverage for instance /\Top_WRAPPER#WRAPPER_insta /R --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File SPI_RAM.sv
+    1                                                module SPI_RAM (din, rx_valid, clk, rst_n, dout, tx_valid);
+    2                                                parameter MEM_DEPTH=256;
+    3                                                parameter ADDR_SIZE= 8;
+    4                                                input logic clk, rst_n, rx_valid;
+    5                                                input logic [9:0] din;
+    6                                                output reg tx_valid;
+    7                                                output reg [ADDR_SIZE-1:0] dout; 
+    8                                                
+    9                                                
+    10                                               reg [ADDR_SIZE-1:0] write_address, read_address; //buses to hold write or read addresses 
+    11                                               reg [ADDR_SIZE-1:0] memory [MEM_DEPTH-1:0]; 
+    12                                               
+    13              1                      14347     always @(posedge clk or negedge rst_n) begin
+    14                                               	if (~rst_n) begin
+    15              1                        392     		dout<=0;
+    16              1                        392     		tx_valid<=0;
+    17              1                        392     		read_address<=0;
+    18              1                        392     		write_address<=0;
+    19              1                        392     		for(int i=0; i<MEM_DEPTH ; i++)
+    19              2                     100352     
+    20              1                     100352     			memory[i]<=0;
+    21                                               	end
+    22                                               	else if (rx_valid) begin
+    23              1                       2236     		tx_valid<=0; // bug found: if tx_valid is asserted once it never desserted unless reset is active
+    24                                               		case ( din [9:8])
+    25                                               		  2'b00: begin
+    26              1                        448     		    write_address<= din[ADDR_SIZE-1:0];
+    27                                                         end 
+    28                                               		  2'b01: begin
+    29              1                        299     		    memory[write_address] <= din [ADDR_SIZE-1:0]; 
+    30                                                         end
+    31                                               		  2'b10: begin
+    32              1                        793     		    read_address<= din [ADDR_SIZE-1:0];
+    33                                                         end
+    34                                               		  2'b11: begin
+    35              1                        696     		    dout<= memory[read_address];
+    36              1                        696     		    tx_valid<=1;
+
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                         76        76         0   100.00%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /\Top_WRAPPER#WRAPPER_insta /R --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+                                               clk           1           1      100.00 
+                                          din[9-0]           1           1      100.00 
+                                         dout[7-0]           1           1      100.00 
+                                 read_address[7-0]           1           1      100.00 
+                                             rst_n           1           1      100.00 
+                                          rx_valid           1           1      100.00 
+                                          tx_valid           1           1      100.00 
+                                write_address[7-0]           1           1      100.00 
+
+Total Node Count     =         38 
+Toggled Node Count   =         38 
+Untoggled Node Count =          0 
+
+Toggle Coverage      =     100.00% (76 of 76 bins)
+
+=================================================================================
+=== Instance: /\Top_WRAPPER#WRAPPER_insta /S
+=== Design Unit: work.SIP_SLAVE
+=================================================================================
+Branch Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Branches                        50        47         3    94.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Top_WRAPPER#WRAPPER_insta /S
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File SPI_SLAVE_File.sv
+------------------------------------IF Branch------------------------------------
+    28                                      6242     Count coming in to IF
+    28              1                        397       if(~rst_n) begin
+    32              1                       5845       else begin
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------CASE Branch------------------------------------
+    40                                     17979     Count coming in to CASE
+    41              1                       3483       IDLE: begin 
+    48              1                       2118       CHK_CMD:
+    66              1                       5482       READ_DATA:
+    74              1                       3585       READ_ADD:
+    82              1                       3310       WRITE:
+                                               1     All False Count
+Branch totals: 6 hits of 6 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    42                                      3483     Count coming in to IF
+    42              1                       1424         if(~SS_n) 
+    44              1                       2059         else 
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    49                                      2118     Count coming in to IF
+    49              1                       2118         if(~SS_n) begin
+    62              1                    ***0***         else if(SS_n) begin
+                                         ***0***     All False Count
+Branch totals: 1 hit of 3 branches = 33.33%
+
+------------------------------------IF Branch------------------------------------
+    50                                      2118     Count coming in to IF
+    50              1                        761           if(MOSI && ~rd_flag) begin
+    54              1                        391             else if(MOSI && rd_flag) begin
+    58              1                        966             else if(~MOSI) begin
+                                         ***0***     All False Count
+Branch totals: 3 hits of 4 branches = 75.00%
+
+------------------------------------IF Branch------------------------------------
+    67                                      5482     Count coming in to IF
+    67              1                        329         if(SS_n) begin
+    70              1                       5153         else begin
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    75                                      3585     Count coming in to IF
+    75              1                        402         if(SS_n) begin
+    78              1                       3183         else begin
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    83                                      3310     Count coming in to IF
+    83              1                        380          if(SS_n) begin
+    86              1                       2930         else begin
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    95                                     19857     Count coming in to IF
+    95              1                        396       if(~rst_n) begin // add reset values for output ports
+    100             1                      19461       else begin
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    101                                    19461     Count coming in to IF
+    101             1                      11761         if(counter_enable) begin
+                                            7700     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    105                                    19461     Count coming in to IF
+    105             1                        400         if(cs==READ_ADD && counter_done) begin
+    108             1                        349         else if (cs==READ_DATA && counter_done)begin
+                                           18712     All False Count
+Branch totals: 3 hits of 3 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    111                                    19461     Count coming in to IF
+    111             1                       2703         if(MISO_CountEn) begin
+                                           16758     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    119                                    18475     Count coming in to IF
+    119             1                        392       if(~rst_n) begin
+    124             1                      18083       else begin
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    125                                    18083     Count coming in to IF
+    125             1                      11894         if(counter_enable) begin
+                                            6189     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    128                                    18083     Count coming in to IF
+    128             1                       1125         if(counter_done) begin
+    132             1                      16958         else
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    135                                    18083     Count coming in to IF
+    135             1                       2703         if(MISO_CountEn) begin
+                                           15380     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    138                                    18083     Count coming in to IF
+    138             1                        323         if (MISO_CountDone) begin
+                                           17760     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    145                                     9168     Count coming in to IF
+    145             1                       1928     assign counter_enable=(cs != IDLE && cs!=CHK_CMD && !SS_n  && ~counter_done && !MISO_CountEn)?1:0; 
+    145             2                       7240     assign counter_enable=(cs != IDLE && cs!=CHK_CMD && !SS_n  && ~counter_done && !MISO_CountEn)?1:0; 
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    146                                    13134     Count coming in to IF
+    146             1                       1135     assign counter_done = (state_countout==4'b1010)?1:0;
+    146             2                      11999     assign counter_done = (state_countout==4'b1010)?1:0;
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    148                                     5134     Count coming in to IF
+    148             1                        349     assign MISO_CountEn=(tx_valid && cs==READ_DATA && !MISO_CountDone) ?1:0;
+    148             2                       4785     assign MISO_CountEn=(tx_valid && cs==READ_DATA && !MISO_CountDone) ?1:0;
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    149                                     3050     Count coming in to IF
+    149             1                        329     assign MISO_CountDone = (MISO_CountOut== 0)?1:0;
+    149             2                       2721     assign MISO_CountDone = (MISO_CountOut== 0)?1:0;
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+Condition Coverage:
+    Enabled Coverage              Bins   Covered    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Conditions                      18        17         1    94.44%
+
+================================Condition Details================================
+
+Condition Coverage for instance /\Top_WRAPPER#WRAPPER_insta /S --
+
+  File SPI_SLAVE_File.sv
+----------------Focused Condition View-------------------
+Line       50 Item    1  (MOSI && ~rd_flag)
+Condition totals: 2 of 2 input terms covered = 100.00%
+
+  Input Term   Covered  Reason for no coverage   Hint
+ -----------  --------  -----------------------  --------------
+        MOSI         Y
+     rd_flag         Y
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  MOSI_0                -                             
+  Row   2:          1  MOSI_1                ~rd_flag                      
+  Row   3:          1  rd_flag_0             MOSI                          
+  Row   4:          1  rd_flag_1             MOSI                          
+
+----------------Focused Condition View-------------------
+Line       54 Item    1  (MOSI && rd_flag)
+Condition totals: 1 of 2 input terms covered = 50.00%
+
+  Input Term   Covered  Reason for no coverage   Hint
+ -----------  --------  -----------------------  --------------
+        MOSI         Y
+     rd_flag         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  MOSI_0                -                             
+  Row   2:          1  MOSI_1                rd_flag                       
+  Row   3:    ***0***  rd_flag_0             MOSI                          
+  Row   4:          1  rd_flag_1             MOSI                          
+
+----------------Focused Condition View-------------------
+Line       105 Item    1  ((cs == 3) && counter_done)
+Condition totals: 2 of 2 input terms covered = 100.00%
+
+    Input Term   Covered  Reason for no coverage   Hint
+   -----------  --------  -----------------------  --------------
+     (cs == 3)         Y
+  counter_done         Y
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  (cs == 3)_0           -                             
+  Row   2:          1  (cs == 3)_1           counter_done                  
+  Row   3:          1  counter_done_0        (cs == 3)                     
+  Row   4:          1  counter_done_1        (cs == 3)                     
+
+----------------Focused Condition View-------------------
+Line       108 Item    1  ((cs == 1) && counter_done)
+Condition totals: 2 of 2 input terms covered = 100.00%
+
+    Input Term   Covered  Reason for no coverage   Hint
+   -----------  --------  -----------------------  --------------
+     (cs == 1)         Y
+  counter_done         Y
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  (cs == 1)_0           -                             
+  Row   2:          1  (cs == 1)_1           counter_done                  
+  Row   3:          1  counter_done_0        (cs == 1)                     
+  Row   4:          1  counter_done_1        (cs == 1)                     
+
+----------------Focused Condition View-------------------
+Line       145 Item    1  (((((cs != 0) && (cs != 7)) && ~SS_n) && ~counter_done) && ~MISO_CountEn)
+Condition totals: 5 of 5 input terms covered = 100.00%
+
+    Input Term   Covered  Reason for no coverage   Hint
+   -----------  --------  -----------------------  --------------
+     (cs != 0)         Y
+     (cs != 7)         Y
+          SS_n         Y
+  counter_done         Y
+  MISO_CountEn         Y
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  (cs != 0)_0           -                             
+  Row   2:          1  (cs != 0)_1           (~MISO_CountEn && ~counter_done && ~SS_n && (cs != 7))
+  Row   3:          1  (cs != 7)_0           (cs != 0)                     
+  Row   4:          1  (cs != 7)_1           (~MISO_CountEn && ~counter_done && ~SS_n && (cs != 0))
+  Row   5:          1  SS_n_0                (~MISO_CountEn && ~counter_done && ((cs != 0) && (cs != 7)))
+  Row   6:          1  SS_n_1                ((cs != 0) && (cs != 7))      
+  Row   7:          1  counter_done_0        (~MISO_CountEn && (((cs != 0) && (cs != 7)) && ~SS_n))
+  Row   8:          1  counter_done_1        (((cs != 0) && (cs != 7)) && ~SS_n)
+  Row   9:          1  MISO_CountEn_0        ((((cs != 0) && (cs != 7)) && ~SS_n) && ~counter_done)
+ Row   10:          1  MISO_CountEn_1        ((((cs != 0) && (cs != 7)) && ~SS_n) && ~counter_done)
+
+----------------Focused Condition View-------------------
+Line       146 Item    1  (state_countout == 10)
+Condition totals: 1 of 1 input term covered = 100.00%
+
+              Input Term   Covered  Reason for no coverage   Hint
+             -----------  --------  -----------------------  --------------
+  (state_countout == 10)         Y
+
+     Rows:       Hits  FEC Target                Non-masking condition(s)      
+ ---------  ---------  --------------------      -------------------------     
+  Row   1:          1  (state_countout == 10)_0  -                             
+  Row   2:          1  (state_countout == 10)_1  -                             
+
+----------------Focused Condition View-------------------
+Line       148 Item    1  ((tx_valid && (cs == 1)) && ~MISO_CountDone)
+Condition totals: 3 of 3 input terms covered = 100.00%
+
+      Input Term   Covered  Reason for no coverage   Hint
+     -----------  --------  -----------------------  --------------
+        tx_valid         Y
+       (cs == 1)         Y
+  MISO_CountDone         Y
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  tx_valid_0            -                             
+  Row   2:          1  tx_valid_1            (~MISO_CountDone && (cs == 1))
+  Row   3:          1  (cs == 1)_0           tx_valid                      
+  Row   4:          1  (cs == 1)_1           (~MISO_CountDone && tx_valid) 
+  Row   5:          1  MISO_CountDone_0      (tx_valid && (cs == 1))       
+  Row   6:          1  MISO_CountDone_1      (tx_valid && (cs == 1))       
+
+----------------Focused Condition View-------------------
+Line       149 Item    1  (MISO_CountOut == 0)
+Condition totals: 1 of 1 input term covered = 100.00%
+
+            Input Term   Covered  Reason for no coverage   Hint
+           -----------  --------  -----------------------  --------------
+  (MISO_CountOut == 0)         Y
+
+     Rows:       Hits  FEC Target              Non-masking condition(s)      
+ ---------  ---------  --------------------    -------------------------     
+  Row   1:          1  (MISO_CountOut == 0)_0  -                             
+  Row   2:          1  (MISO_CountOut == 0)_1  -                             
+
+
+FSM Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    FSM States                       5         5         0   100.00%
+    FSM Transitions                  8         8         0   100.00%
+
+================================FSM Details================================
+
+FSM Coverage for instance /\Top_WRAPPER#WRAPPER_insta /S --
+
+FSM_ID: cs
+    Current State Object : cs
+    ----------------------
+    State Value MapInfo :
+    ---------------------
+Line          State Name               Value
+----          ----------               -----
+  41                IDLE                   0
+  48             CHK_CMD                   7
+  82               WRITE                   4
+  66           READ_DATA                   1
+  74            READ_ADD                   3
+    Covered States :
+    ----------------
+                   State           Hit_count
+                   -----           ---------
+                    IDLE                2139          
+                 CHK_CMD                1267          
+                   WRITE                 855          
+               READ_DATA                1114          
+                READ_ADD                 867          
+    Covered Transitions :
+    ---------------------
+Line            Trans_ID           Hit_count          Transition          
+----            --------           ---------          ----------          
+  43                   0                1267          IDLE -> CHK_CMD               
+  63                   1                  17          CHK_CMD -> IDLE               
+  59                   2                 429          CHK_CMD -> WRITE              
+  55                   3                 385          CHK_CMD -> READ_DATA          
+  51                   4                 436          CHK_CMD -> READ_ADD           
+  84                   5                 429          WRITE -> IDLE                 
+  68                   6                 384          READ_DATA -> IDLE             
+  76                   7                 436          READ_ADD -> IDLE              
+
+
+    Summary                       Bins      Hits    Misses  Coverage
+    -------                       ----      ----    ------  --------
+        FSM States                   5         5         0   100.00%
+        FSM Transitions              8         8         0   100.00%
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Statements                      38        37         1    97.36%
+
+================================Statement Details================================
+
+Statement Coverage for instance /\Top_WRAPPER#WRAPPER_insta /S --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File SPI_SLAVE_File.sv
+    1                                                module SIP_SLAVE (MOSI,MISO,SS_n,clk,rst_n,rx_data,rx_valid, tx_data, tx_valid);
+    2                                                input logic MOSI,SS_n,clk,rst_n,tx_valid;
+    3                                                input logic [7:0] tx_data;
+    4                                                output logic MISO;
+    5                                                output logic rx_valid; 
+    6                                                output logic [9:0] rx_data; 
+    7                                                
+    8                                                
+    9                                                //states
+    10                                               parameter IDLE=3'b000;
+    11                                               parameter READ_DATA=3'b001;
+    12                                               parameter READ_ADD=3'b011;
+    13                                               parameter CHK_CMD=3'b111;
+    14                                               parameter WRITE=3'b100;
+    15                                               
+    16                                               reg [2:0] cs,ns;
+    17                                               reg rd_flag; // to check if READ_ADD state has been executed or not (high if executed)
+    18                                               reg [3:0] state_countout;
+    19                                               reg[3:0] MISO_CountOut;
+    20                                               wire counter_enable; // to count 10 clock cycles while recieving data
+    21                                               wire counter_done; // flag sent by the counter, high when 10 cycles are completed
+    22                                               wire MISO_CountEn; 
+    23                                               wire MISO_CountDone;
+    24                                               reg s_to_p_done; // signal added to correct rx_valid logic
+    25                                               
+    26                                               //state logic
+    27              1                       6242     always@(posedge clk or negedge rst_n) begin
+    28                                                 if(~rst_n) begin
+    29              1                        397         cs<= IDLE;
+    30              1                        397         rd_flag<=0;
+    31                                                 end
+    32                                                 else begin
+    33              1                       5845         cs<=ns;
+    34                                                 end
+    35                                               end  
+    36                                               
+    37                                               
+    38                                               //next state logic
+    39              1                      17979     always@(*) begin
+    40                                                 case(cs)
+    41                                                 IDLE: begin 
+    42                                                   if(~SS_n) 
+    43              1                       1424           ns=CHK_CMD;
+    44                                                   else 
+    45              1                       2059           ns=IDLE;
+    46                                                 end
+    47                                               
+    48                                                 CHK_CMD:
+    49                                                   if(~SS_n) begin
+    50                                                     if(MOSI && ~rd_flag) begin
+    51              1                        761              ns=READ_ADD;
+    52                                                        //rd_flag=1;
+    53                                                       end
+    54                                                       else if(MOSI && rd_flag) begin
+    55              1                        391              ns=READ_DATA;
+    56                                                        //rd_flag=0;
+    57                                                       end
+    58                                                       else if(~MOSI) begin
+    59              1                        966              ns=WRITE;
+    60                                                       end
+    61                                                   end
+    62                                                   else if(SS_n) begin
+    63              1                    ***0***           ns=IDLE;
+    64                                                   end
+    65                                               
+    66                                                 READ_DATA:
+    67                                                   if(SS_n) begin
+    68              1                        329           ns=IDLE;
+    69                                                   end
+    70                                                   else begin
+    71              1                       5153           ns=READ_DATA;
+    72                                                   end
+    73                                               
+    74                                                 READ_ADD:
+    75                                                   if(SS_n) begin
+    76              1                        402           ns=IDLE;
+    77                                                   end
+    78                                                   else begin
+    79              1                       3183           ns=READ_ADD;
+    80                                                   end
+    81                                                   
+    82                                                 WRITE:
+    83                                                    if(SS_n) begin
+    84              1                        380           ns=IDLE;
+    85                                                   end
+    86                                                   else begin
+    87              1                       2930           ns=WRITE;
+    88                                                   end
+    89                                               
+    90                                                   endcase
+    91                                               end
+    92                                                 
+    93                                               // output logic
+    94              1                      19857     always@ (posedge clk or negedge rst_n) begin //add asynchronous reset to output sensitivity list
+    95                                                 if(~rst_n) begin // add reset values for output ports
+    96              1                        396         MISO<=0;
+    97              1                        396         rx_data<=0;
+    98              1                        396         s_to_p_done<=0;
+    99                                                 end
+    100                                                else begin
+    101                                                  if(counter_enable) begin
+    102             1                      11761           rx_data<={rx_data[8:0], MOSI};
+    103                                                  end
+    104                                                  
+    105                                                  if(cs==READ_ADD && counter_done) begin
+    106             1                        400           rd_flag<=1;
+    107                                                  end
+    108                                                  else if (cs==READ_DATA && counter_done)begin
+    109             1                        349           rd_flag<=0;
+    110                                                  end
+    111                                                  if(MISO_CountEn) begin
+    112             1                       2703           MISO<= tx_data[MISO_CountOut-1];
+    113                                                  end
+    114                                                end
+    115                                              end
+    116                                              
+    117                                              // counters logic
+    118             1                      18475     always@(posedge clk or negedge rst_n) begin  
+    119                                                if(~rst_n) begin
+    120             1                        392         state_countout<=0;
+    121             1                        392         MISO_CountOut<=8; // counter_down, to send MSB firstly to master
+    122                                              
+    123                                                end
+    124                                                else begin
+    125                                                  if(counter_enable) begin
+    126             1                      11894           state_countout<=state_countout+1;
+    127                                                  end
+    128                                                  if(counter_done) begin
+    129             1                       1125           state_countout<=0;
+    130             1                       1125           s_to_p_done<=1;
+    131                                                  end
+    132                                                  else
+    133             1                      16958           s_to_p_done<=0;
+    134                                              
+    135                                                  if(MISO_CountEn) begin
+    136             1                       2703           MISO_CountOut<=MISO_CountOut-1;
+    137                                                  end
+    138                                                  if (MISO_CountDone) begin
+    139             1                        323           MISO_CountOut<=8;
+    140                                                  end
+    141                                                end  
+    142                                              end
+    143                                              
+    144                                              // fixed counter enable logic
+    145             1                       9169     assign counter_enable=(cs != IDLE && cs!=CHK_CMD && !SS_n  && ~counter_done && !MISO_CountEn)?1:0; 
+    146             1                      13135     assign counter_done = (state_countout==4'b1010)?1:0;
+    147                                              // bug parallel to serial conversion keeps happening after it's supposed to be done fixed MISO_CountEn logic
+    148             1                       5135     assign MISO_CountEn=(tx_valid && cs==READ_DATA && !MISO_CountDone) ?1:0;
+    149             1                       3051     assign MISO_CountDone = (MISO_CountOut== 0)?1:0;
+
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                         90        90         0   100.00%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /\Top_WRAPPER#WRAPPER_insta /S --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+                                              MISO           1           1      100.00 
+                                    MISO_CountDone           1           1      100.00 
+                                      MISO_CountEn           1           1      100.00 
+                                MISO_CountOut[3-0]           1           1      100.00 
+                                              MOSI           1           1      100.00 
+                                              SS_n           1           1      100.00 
+                                               clk           1           1      100.00 
+                                      counter_done           1           1      100.00 
+                                    counter_enable           1           1      100.00 
+                                           cs[2-0]           1           1      100.00 
+                                           ns[2-0]           1           1      100.00 
+                                           rd_flag           1           1      100.00 
+                                             rst_n           1           1      100.00 
+                                      rx_data[9-0]           1           1      100.00 
+                                          rx_valid           1           1      100.00 
+                                       s_to_p_done           1           1      100.00 
+                               state_countout[3-0]           1           1      100.00 
+                                      tx_data[7-0]           1           1      100.00 
+                                          tx_valid           1           1      100.00 
+
+Total Node Count     =         45 
+Toggled Node Count   =         45 
+Untoggled Node Count =          0 
+
+Toggle Coverage      =     100.00% (90 of 90 bins)
+
+=================================================================================
+=== Instance: /\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta
+=== Design Unit: work.Wrapper_Assertions
+=================================================================================
+
+Assertion Coverage:
+    Assertions                       6         6         0   100.00%
+--------------------------------------------------------------------
+Name                 File(Line)                   Failure      Pass 
+                                                  Count        Count
+--------------------------------------------------------------------
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/Asynchronous_reset
+                     assertions_WRAPPER.sv(14)          0          1
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/MOSI_Write_ap
+                     assertions_WRAPPER.sv(44)          0          1
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/MOSI_read_ap
+                     assertions_WRAPPER.sv(47)          0          1
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/SS_correct_sequence_ReadData_ap
+                     assertions_WRAPPER.sv(50)          0          1
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/SS_correct_sequence_write_ap
+                     assertions_WRAPPER.sv(53)          0          1
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/SS_correct_sequence_Readadd_ap
+                     assertions_WRAPPER.sv(56)          0          1
+Branch Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Branches                         2         2         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File assertions_WRAPPER.sv
+------------------------------------IF Branch------------------------------------
+    13                                       240     Count coming in to IF
+    13              1                        198     			if(!rst_n)
+                                              42     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+
+Directive Coverage:
+    Directives                       5         5         0   100.00%
+
+DIRECTIVE COVERAGE:
+--------------------------------------------------------------------------------------------
+Name                                     Design Design   Lang File(Line)      Hits Status    
+                                         Unit   UnitType                                     
+--------------------------------------------------------------------------------------------
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/MOSI_Write_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(45)
+                                                                               383 Covered   
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/MOSI_read_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(48)
+                                                                               781 Covered   
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/SS_correct_sequence_ReadData_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(51)
+                                                                               323 Covered   
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/SS_correct_sequence_write_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(54)
+                                                                               340 Covered   
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/SS_correct_sequence_Readadd_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(57)
+                                                                               369 Covered   
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Statements                       6         6         0   100.00%
+
+================================Statement Details================================
+
+Statement Coverage for instance /\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File assertions_WRAPPER.sv
+    1                                                module Wrapper_Assertions( WRAPPER_interface.DUT WRAPPER_if);
+    2                                                	
+    3                                                	logic MOSI, SS_n, rst_n, MISO;
+    4                                                	logic clk;
+    5                                                
+    6               1                      13268     	assign MOSI= WRAPPER_if.MOSI;
+    7               1                       2417     	assign SS_n= WRAPPER_if.SS_n;
+    8               1                      40012     	assign clk = WRAPPER_if.clk;
+    9               1                        393     	assign rst_n = WRAPPER_if.rst_n;
+    10              1                         44     	assign MISO = WRAPPER_if.MISO;
+    11                                               
+    12              1                        240     		always_comb begin
+
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                         10        10         0   100.00%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+                                              MISO           1           1      100.00 
+                                              MOSI           1           1      100.00 
+                                              SS_n           1           1      100.00 
+                                               clk           1           1      100.00 
+                                             rst_n           1           1      100.00 
+
+Total Node Count     =          5 
+Toggled Node Count   =          5 
+Untoggled Node Count =          0 
+
+Toggle Coverage      =     100.00% (10 of 10 bins)
+
+=================================================================================
+=== Instance: /\Top_WRAPPER#WRAPPER_insta 
+=== Design Unit: work.SPI_Wrapper
+=================================================================================
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Statements                       4         4         0   100.00%
+
+================================Statement Details================================
+
+Statement Coverage for instance /\Top_WRAPPER#WRAPPER_insta  --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File SPI_WRAPPER.sv
+    1                                                module SPI_Wrapper(WRAPPER_interface.DUT WRAPPER_if);
+    2                                                logic MOSI, SS_n,clk,rst_n;
+    3                                                logic MISO;
+    4                                                
+    5               1                      13268     assign MOSI= WRAPPER_if.MOSI;
+    6               1                       2417     assign SS_n= WRAPPER_if.SS_n;
+    7               1                      40012     assign clk= WRAPPER_if.clk;
+    8               1                        393     assign rst_n= WRAPPER_if.rst_n;
+
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                         50        50         0   100.00%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /\Top_WRAPPER#WRAPPER_insta  --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+                                              MISO           1           1      100.00 
+                                              MOSI           1           1      100.00 
+                                              SS_n           1           1      100.00 
+                                               clk           1           1      100.00 
+                                             rst_n           1           1      100.00 
+                                          rx_valid           1           1      100.00 
+                                       rxdata[0-9]           1           1      100.00 
+                                          tx_valid           1           1      100.00 
+                                       txdata[0-7]           1           1      100.00 
+
+Total Node Count     =         25 
+Toggled Node Count   =         25 
+Untoggled Node Count =          0 
+
+Toggle Coverage      =     100.00% (50 of 50 bins)
+
+
+DIRECTIVE COVERAGE:
+--------------------------------------------------------------------------------------------
+Name                                     Design Design   Lang File(Line)      Hits Status    
+                                         Unit   UnitType                                     
+--------------------------------------------------------------------------------------------
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/MOSI_Write_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(45)
+                                                                               383 Covered   
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/MOSI_read_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(48)
+                                                                               781 Covered   
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/SS_correct_sequence_ReadData_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(51)
+                                                                               323 Covered   
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/SS_correct_sequence_write_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(54)
+                                                                               340 Covered   
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/SS_correct_sequence_Readadd_cp 
+                                         Wrapper_Assertions Verilog  SVA  assertions_WRAPPER.sv(57)
+                                                                               369 Covered   
+
+TOTAL DIRECTIVE COVERAGE: 100.00%  COVERS: 5
+
+ASSERTION RESULTS:
+--------------------------------------------------------------------
+Name                 File(Line)                   Failure      Pass 
+                                                  Count        Count
+--------------------------------------------------------------------
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/Asynchronous_reset
+                     assertions_WRAPPER.sv(14)          0          1
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/MOSI_Write_ap
+                     assertions_WRAPPER.sv(44)          0          1
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/MOSI_read_ap
+                     assertions_WRAPPER.sv(47)          0          1
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/SS_correct_sequence_ReadData_ap
+                     assertions_WRAPPER.sv(50)          0          1
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/SS_correct_sequence_write_ap
+                     assertions_WRAPPER.sv(53)          0          1
+/\Top_WRAPPER#WRAPPER_insta /wrap_sva_insta/SS_correct_sequence_Readadd_ap
+                     assertions_WRAPPER.sv(56)          0          1
+
+Total Coverage By Instance (filtered view): 98.27%
+
